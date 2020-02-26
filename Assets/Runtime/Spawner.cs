@@ -1,24 +1,22 @@
 ﻿using UnityEngine;
 
-public class Spawner : MonoBehaviour
-{
+namespace domino_effect.Runtime {
+  public class Spawner : BaseMonoBehaviour {
     public GameObject Spawn;
 
-    private Camera mainCamera;
+    public Transform SpawnPoint;
 
-    private void Awake()
-    {
-        mainCamera = Camera.main;
+    private void Awake() {
+      if (Spawn == null) Debug.LogError($"[{name}][Spawner][Awake] Please define an object prefab to Spawn on click");
+      if (SpawnPoint == null) SpawnPoint = Transform;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            var mousePosition = Input.mousePosition;
-            var worldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-            GameObject.Instantiate(Spawn, new Vector3(worldPosition.x, worldPosition.y, Spawn.transform.position.z), Quaternion.identity);
-        }
+    private void Update() {
+      if (Spawn == null) return;
+
+      if (Input.GetMouseButtonDown(0)) {
+        GameObject.Instantiate(Spawn, SpawnPoint.position, Quaternion.identity);
+      }
     }
+  }
 }

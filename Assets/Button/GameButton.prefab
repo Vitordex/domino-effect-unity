@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2640216692873884383}
   - component: {fileID: 4519253185152733953}
   - component: {fileID: 966270937856107296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameButton
-  m_TagString: Untagged
+  m_TagString: BlockSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d3de5c7d793f4af4da762a90af41cb56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

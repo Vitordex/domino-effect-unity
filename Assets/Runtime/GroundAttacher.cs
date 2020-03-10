@@ -35,7 +35,7 @@ namespace domino_effect.Runtime {
       else if (rightMesh == null) _groundMesh = leftMesh;
       else _groundMesh = rightMesh.transform.position.y >= leftMesh.transform.position.y ? rightMesh : leftMesh;
 
-      var placeY = _groundMesh.transform.position.y + _groundMesh.bounds.size.y;
+      var placeY = _groundMesh.transform.position.y + _groundMesh.bounds.extents.y + MeshRenderer.bounds.extents.y;
       var position = Transform.position;
       Transform.position = new Vector3(position.x, placeY, position.z);
     }

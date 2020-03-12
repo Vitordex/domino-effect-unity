@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using domino_effect.Input;
+using UnityEngine;
 
 namespace domino_effect.Runtime {
   public class GroundAttacher : BaseMonoBehaviour {
@@ -25,7 +26,7 @@ namespace domino_effect.Runtime {
     }
 
     private void Update() {
-      var mousePosition = Input.mousePosition;
+      var mousePosition = InputManager.Instance.GetMousePosition();
       var boundsX = MeshRenderer.bounds.size.x;
       var rightMesh = GetMeshBeneathPosition(mousePosition, GetOffset(Transform.position, boundsX), _positionZ, MaxRayDistance);
       var leftMesh = GetMeshBeneathPosition(mousePosition, GetOffset(Transform.position, boundsX, true), _positionZ, MaxRayDistance);

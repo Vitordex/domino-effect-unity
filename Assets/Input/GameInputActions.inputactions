@@ -1,0 +1,71 @@
+{
+    "name": "GameInputActions",
+    "maps": [
+        {
+            "name": "GameControls",
+            "id": "7a331d82-37a7-43af-83d9-71773a2dae5f",
+            "actions": [
+                {
+                    "name": "Spawn",
+                    "type": "Button",
+                    "id": "afa73ba8-582b-42db-9f5f-131319d9b792",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Delete",
+                    "type": "Button",
+                    "id": "4a626b0d-ba68-4cf0-a68e-e36b1f6ecaa9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "BackToMenu",
+                    "type": "Button",
+                    "id": "eff17430-cbac-4839-938d-2a8f10ba225f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "868cb470-0fda-460e-9377-297b33642853",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "870b1223-184d-42f6-8f0c-39850dc5fd05",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Delete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96c34bfa-8456-4643-892b-fe756083ab70",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BackToMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

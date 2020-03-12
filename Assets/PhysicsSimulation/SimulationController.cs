@@ -49,8 +49,6 @@ namespace domino_effect.PhysicsSimulation
                 spawn.transform.rotation = initialTransform.Item2;
             }
 
-            _simulationStartMap.Clear();
-
             OnStop.Invoke();
         }
 

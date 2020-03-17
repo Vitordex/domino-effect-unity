@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace domino_effect.Spawn {
+  [RequireComponent(typeof(SpawnBlocker))]
   public class SpawnManager : BaseMonoBehaviour {
     public GameObject SpawnPrefab;
     public int SpawnLimit;
     public Transform SpawnPoint;
+
+    private SpawnBlocker _spawnBlocker;
 
     public List<IBody> Spawns = new List<IBody>();
 
@@ -16,6 +19,8 @@ namespace domino_effect.Spawn {
     private void Awake() {
       if (SpawnPrefab == null) Debug.LogError($"[{name}][Spawner][Awake] Please define an object prefab to Spawn on click");
       if (SpawnPoint == null) SpawnPoint = Transform;
+
+      _spawnBlocker = GetComponent<SpawnBlocker>();
     }
 
     private GameObject SpawnObject() {
@@ -24,6 +29,8 @@ namespace domino_effect.Spawn {
 
     public void Spawn() {
       if (Spawns.Count >= SpawnLimit) return;
+
+      if (_spawnBlocker.IsSpawnBlocked()) return;
 
       var spawned = SpawnObject();
       Spawns.Add(spawned.GetComponent<IBody>());

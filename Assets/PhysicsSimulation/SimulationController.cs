@@ -16,7 +16,7 @@ namespace domino_effect.PhysicsSimulation {
     }
 
     public void StartSimulation() {
-      _simulation.Start();
+      _simulation.Initiate();
     }
 
     public void StopSimulation() {

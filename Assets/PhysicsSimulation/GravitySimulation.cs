@@ -8,7 +8,7 @@ namespace domino_effect.PhysicsSimulation {
       _initialGravity = Physics.gravity;
     }
 
-    public void Start() {
+    public void Initiate() {
       Physics.gravity = _initialGravity;
     }
 

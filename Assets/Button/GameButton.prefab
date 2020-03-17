@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8346022343521150819}
   - component: {fileID: 966270937856107296}
   - component: {fileID: 4457987806764566155}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GameButton
   m_TagString: BlockSpawn
   m_Icon: {fileID: 0}

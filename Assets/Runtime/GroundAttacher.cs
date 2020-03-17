@@ -1,7 +1,7 @@
 ﻿using domino_effect.Input;
 using UnityEngine;
 
-namespace domino_effect.Runtime {
+namespace domino_effect {
   public class GroundAttacher : BaseMonoBehaviour {
     private MeshRenderer _currentMeshRenderer;
     protected MeshRenderer MeshRenderer {

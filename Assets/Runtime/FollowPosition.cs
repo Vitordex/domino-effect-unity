@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace domino_effect.Runtime {
+namespace domino_effect {
   public class FollowPosition : BaseMonoBehaviour {
     public GameObject Follow;
 

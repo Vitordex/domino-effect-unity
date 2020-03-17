@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace domino_effect.Runtime.Spawn {
+namespace domino_effect.Spawn {
   public class SpawnUIBinder : MonoBehaviour {
     public TextMeshProUGUI _uiText;
     private SpawnManager _manager;

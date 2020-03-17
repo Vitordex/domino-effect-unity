@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace domino_effect.Runtime {
+namespace domino_effect {
   public class GameManager : MonoBehaviour {
     public GameObject MainMenuInterface;
 

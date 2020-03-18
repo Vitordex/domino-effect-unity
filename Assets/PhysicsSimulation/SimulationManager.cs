@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace domino_effect.PhysicsSimulation {
-  public class SimulationController : MonoBehaviour {
+  public class SimulationManager : MonoBehaviour {
     private ISimulation _simulation;
     private SpawnManager _spawnManager;
 

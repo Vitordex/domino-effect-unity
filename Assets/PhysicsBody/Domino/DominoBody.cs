@@ -17,6 +17,7 @@ namespace domino_effect.PhysicsBody {
 
     private void Start() {
       _initialValues = (Transform.position, Transform.rotation);
+      _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public void Rollback() {

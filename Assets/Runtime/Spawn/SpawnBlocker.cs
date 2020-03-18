@@ -5,7 +5,7 @@ using UnityEngine;
 namespace domino_effect.Spawn {
   public class SpawnBlocker : BaseMonoBehaviour {
     private bool _blocked;
-
+    private bool _shouldBlock;
     private IBlocker[] _blockers;
 
     private void Awake() {
@@ -13,7 +13,11 @@ namespace domino_effect.Spawn {
     }
 
     public bool IsSpawnBlocked() {
-      return _blockers.Any((blocker) => blocker.IsBlocked);
+      return _blockers.Any((blocker) => blocker.IsBlocked) || _shouldBlock;
+    }
+
+    public void Block(bool shouldBlock) {
+      _shouldBlock = shouldBlock;
     }
   }
 }

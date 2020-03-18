@@ -38,6 +38,8 @@ namespace domino_effect.Spawn {
     }
 
     public void DeleteSpawn(GameObject spawn) {
+      if (_spawnBlocker.IsSpawnBlocked()) return;
+
       Spawns.Remove(spawn?.GetComponent<IBody>());
       Destroy(spawn);
     }

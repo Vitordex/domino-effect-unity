@@ -22,8 +22,12 @@ namespace domino_effect {
       OnEndLevel.Invoke();
     }
 
+    public void GoToMainMenu() {
+      SceneManager.LoadSceneAsync(0);
+    }
+
     public void RestartLevel() {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+      SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
   }
 }

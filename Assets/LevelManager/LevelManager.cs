@@ -6,8 +6,8 @@ namespace domino_effect {
   public class LevelManager : MonoBehaviour {
     public static LevelManager Instance;
 
-    [SerializeField] private UnityEvent OnEndLevel = null;
     [SerializeField] private UnityEvent OnStartLevel = null;
+    [SerializeField] private UnityEvent OnEndLevel = null;
 
     private void Awake() {
       Instance = this;

@@ -15,6 +15,7 @@ namespace domino_effect.Spawn {
     public List<IBody> Spawns = new List<IBody>();
 
     public IntEvent OnSpawn = new IntEvent();
+    public UnityEvent OnFirstSpawn;
 
     private void Awake() {
       if (SpawnPrefab == null) Debug.LogError($"[{name}][Spawner][Awake] Please define an object prefab to Spawn on click");
@@ -34,7 +35,9 @@ namespace domino_effect.Spawn {
 
       var spawned = SpawnObject();
       Spawns.Add(spawned.GetComponent<IBody>());
-      OnSpawn.Invoke(Spawns.Count);
+      
+      if(Spawns.Count == 1) OnFirstSpawn.Invoke();
+      else OnSpawn.Invoke(Spawns.Count);
     }
 
     public void DeleteSpawn(GameObject spawn) {

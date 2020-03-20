@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 namespace domino_effect.BlockSpawn
 {
-    public class CollisionBlocker : MonoBehaviour, IBlocker
+    public class InverseCollisionBlocker : MonoBehaviour, IBlocker
     {
-        private bool _isBlocked = false;
+        [SerializeField] private bool _isBlocked = false;
 
         public bool IsBlocked => _isBlocked;
 
@@ -13,7 +13,6 @@ namespace domino_effect.BlockSpawn
         public UnityEvent OnBlock => _onBlock;
 
         [SerializeField] private UnityEvent _onUnblock = null;
-
         public UnityEvent OnUnblock => _onUnblock;
 
         [SerializeField] private bool _isEnabled = true;
@@ -23,16 +22,31 @@ namespace domino_effect.BlockSpawn
         {
             if (!IsEnabled) return;
 
-            _isBlocked = IsPlayerObject(other.tag) ? true : _isBlocked;
-            if (_isBlocked) OnBlock.Invoke();
+            var blocked = IsSpawnBlocked(shouldBlock: false, other.tag);
+            InvokeEvent(blocked, _isBlocked);
+            _isBlocked = blocked;
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (!IsEnabled) return;
 
-            _isBlocked = IsPlayerObject(other.tag) ? false : _isBlocked;
-            if (!_isBlocked) OnUnblock.Invoke();
+            var blocked = IsSpawnBlocked(shouldBlock: true, other.tag);
+            InvokeEvent(blocked, _isBlocked);
+            _isBlocked = blocked;
+        }
+
+        private void InvokeEvent(bool blocked, bool oldValue)
+        {
+            if (blocked == oldValue) return;
+
+            var invokeEvent = blocked ? OnBlock : OnUnblock;
+            invokeEvent.Invoke();
+        }
+
+        private bool IsSpawnBlocked(bool shouldBlock, string tag)
+        {
+            return IsPlayerObject(tag) ? shouldBlock : _isBlocked;
         }
 
         private bool IsPlayerObject(string tag)

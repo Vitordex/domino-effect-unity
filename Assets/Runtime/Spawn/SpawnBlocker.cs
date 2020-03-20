@@ -18,16 +18,18 @@ namespace domino_effect.Spawn {
       foreach (var blocker in _blockers) {
         blocker.OnBlock.AddListener(OnBlockHandler);
         blocker.OnUnblock.AddListener(OnUnblockHandler);
+
+        if(blocker.IsBlocked && blocker.IsEnabled) OnBlockHandler();
       }
     }
 
     public void OnBlockHandler() {
-      _blocked = true;
+      _blocked = _shouldBlock || true;
       OnBlock.Invoke();
     }
 
     public void OnUnblockHandler() {
-      _blocked = false;
+      _blocked = _shouldBlock || false;
       OnUnblock.Invoke();
     }
 
@@ -37,6 +39,13 @@ namespace domino_effect.Spawn {
 
     public void Block(bool shouldBlock) {
       _shouldBlock = shouldBlock;
+    }
+
+    public void EnableAll() {
+      foreach (var blocker in _blockers)
+      {
+          blocker.SetEnabled(true);
+      }
     }
   }
 }

@@ -42,9 +42,17 @@ namespace domino_effect.Spawn {
     }
 
     public void EnableAll() {
+      SetAllEnabled(true);
+    }
+
+    public void DisableAll() {
+      SetAllEnabled(false);
+    }
+
+    private void SetAllEnabled(bool enabled) {
       foreach (var blocker in _blockers)
       {
-          blocker.SetEnabled(true);
+          blocker.SetEnabled(enabled);
       }
     }
   }

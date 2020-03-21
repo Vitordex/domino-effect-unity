@@ -23,7 +23,7 @@ namespace domino_effect.BlockSpawn
             if (!IsEnabled) return;
 
             var blocked = IsSpawnBlocked(shouldBlock: false, other.tag);
-            InvokeEvent(blocked, _isBlocked);
+            InvokeEventOnValueChange(blocked, _isBlocked);
             _isBlocked = blocked;
         }
 
@@ -32,16 +32,15 @@ namespace domino_effect.BlockSpawn
             if (!IsEnabled) return;
 
             var blocked = IsSpawnBlocked(shouldBlock: true, other.tag);
-            InvokeEvent(blocked, _isBlocked);
+            InvokeEventOnValueChange(blocked, _isBlocked);
             _isBlocked = blocked;
         }
 
-        private void InvokeEvent(bool blocked, bool oldValue)
+        private void InvokeEventOnValueChange(bool blocked, bool oldValue)
         {
             if (blocked == oldValue) return;
 
-            var invokeEvent = blocked ? OnBlock : OnUnblock;
-            invokeEvent.Invoke();
+            InvokeEvent(blocked);
         }
 
         private bool IsSpawnBlocked(bool shouldBlock, string tag)
@@ -57,6 +56,28 @@ namespace domino_effect.BlockSpawn
         public void SetEnabled(bool value)
         {
             _isEnabled = value;
+
+            InvokeEventIfEnabled(_isBlocked);
+        }
+
+        public void Block(bool block)
+        {
+            _isBlocked = block;
+
+            InvokeEventIfEnabled(_isBlocked);
+        }
+
+        private void InvokeEventIfEnabled(bool blocked)
+        {
+            if (!_isEnabled) return;
+
+            InvokeEvent(blocked);
+        }
+
+        private void InvokeEvent(bool blocked)
+        {
+            var invokeEvent = blocked ? OnBlock : OnUnblock;
+            invokeEvent.Invoke();
         }
     }
 }

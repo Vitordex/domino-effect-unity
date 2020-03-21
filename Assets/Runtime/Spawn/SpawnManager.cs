@@ -17,6 +17,8 @@ namespace domino_effect.Spawn {
     public IntEvent OnSpawn = new IntEvent();
     public UnityEvent OnFirstSpawn;
 
+    public UnityEvent OnEmptyArray;
+
     private void Awake() {
       if (SpawnPrefab == null) Debug.LogError($"[{name}][Spawner][Awake] Please define an object prefab to Spawn on click");
       if (SpawnPoint == null) SpawnPoint = Transform;
@@ -45,6 +47,8 @@ namespace domino_effect.Spawn {
 
       Spawns.Remove(spawn?.GetComponent<IBody>());
       Destroy(spawn);
+
+      if(Spawns.Count <= 0) OnEmptyArray.Invoke();
     }
 
     public void ClearSpawns() {

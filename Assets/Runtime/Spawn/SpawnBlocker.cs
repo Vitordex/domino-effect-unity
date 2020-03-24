@@ -7,7 +7,7 @@ namespace domino_effect.Spawn {
   public class SpawnBlocker : BaseMonoBehaviour {
     private bool _blocked;
     private bool _shouldBlock;
-    private IBlocker[] _blockers;
+    [SerializeField] private IBlocker[] _blockers;
 
     public UnityEvent OnBlock;
     public UnityEvent OnUnblock;
@@ -29,8 +29,8 @@ namespace domino_effect.Spawn {
     }
 
     public void OnUnblockHandler() {
-      _blocked = _shouldBlock || false;
-      OnUnblock.Invoke();
+      _blocked = _shouldBlock || _blockers.Any((blocker) => blocker.IsBlocked && blocker.IsEnabled);
+      if(!_blocked) OnUnblock.Invoke();
     }
 
     public bool IsSpawnBlocked() {

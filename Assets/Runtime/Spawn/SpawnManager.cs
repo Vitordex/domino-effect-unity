@@ -49,6 +49,8 @@ namespace domino_effect.Spawn {
       Destroy(spawn);
 
       if(Spawns.Count <= 0) OnEmptyArray.Invoke();
+      
+      OnSpawn.Invoke(Spawns.Count);
     }
 
     public void ClearSpawns() {

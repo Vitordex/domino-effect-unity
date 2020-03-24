@@ -23,8 +23,9 @@ namespace domino_effect.BlockSpawn
             if (!IsEnabled) return;
 
             var blocked = IsSpawnBlocked(shouldBlock: false, other.tag);
-            InvokeEventOnValueChange(blocked, _isBlocked);
+            var oldValue = _isBlocked;
             _isBlocked = blocked;
+            InvokeEventOnValueChange(blocked, oldValue);
         }
 
         private void OnTriggerExit(Collider other)
@@ -32,8 +33,9 @@ namespace domino_effect.BlockSpawn
             if (!IsEnabled) return;
 
             var blocked = IsSpawnBlocked(shouldBlock: true, other.tag);
-            InvokeEventOnValueChange(blocked, _isBlocked);
+            var oldValue = _isBlocked;
             _isBlocked = blocked;
+            InvokeEventOnValueChange(blocked, oldValue);
         }
 
         private void InvokeEventOnValueChange(bool blocked, bool oldValue)

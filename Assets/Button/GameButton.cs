@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
-namespace domino_effect {
-  public class GameButton : BaseMonoBehaviour {
+namespace domino_effect
+{
+    public class GameButton : BaseMonoBehaviour {
     private GameButtonAnimatorController _controller;
+    public UnityEvent OnPress;
 
     private void Awake() {
       _controller = GetComponentInChildren<GameButtonAnimatorController>();
@@ -13,7 +14,7 @@ namespace domino_effect {
     private void OnCollisionEnter(Collision other) {
       _controller.Press();
       LevelManager.Instance.EndGame();
-      GetComponent<Collider>().enabled = false;
+      OnPress.Invoke();
     }
   }
 }

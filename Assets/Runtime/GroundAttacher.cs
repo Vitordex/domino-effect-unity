@@ -7,7 +7,7 @@ namespace domino_effect {
     protected MeshRenderer MeshRenderer {
       get {
         if (_currentMeshRenderer == null) {
-          _currentMeshRenderer = GetComponentInChildren<MeshRenderer>();
+          _currentMeshRenderer = _previewSpawn.GetComponent<MeshRenderer>();
         }
 
         return _currentMeshRenderer;
@@ -21,15 +21,20 @@ namespace domino_effect {
 
     private float _positionZ;
 
+    private Transform _previewSpawn;
+
     private void Awake() {
       _positionZ = Transform.position.z;
+      _previewSpawn = Transform.GetChild(0);
+
+      _previewSpawn.SetParent(null);
     }
 
     private void Update() {
       var mousePosition = InputManager.Instance.GetMousePosition();
       var boundsX = MeshRenderer.bounds.size.x;
-      var rightMesh = GetMeshBeneathPosition(mousePosition, GetOffset(Transform.position, boundsX), _positionZ, MaxRayDistance);
-      var leftMesh = GetMeshBeneathPosition(mousePosition, GetOffset(Transform.position, boundsX, true), _positionZ, MaxRayDistance);
+      var rightMesh = GetMeshBeneathPosition(mousePosition, GetOffset(boundsX), _positionZ, MaxRayDistance);
+      var leftMesh = GetMeshBeneathPosition(mousePosition, GetOffset(boundsX, true), _positionZ, MaxRayDistance);
       if (rightMesh == null && leftMesh == null) return;
 
       if (leftMesh == null) _groundMesh = rightMesh;
@@ -38,10 +43,11 @@ namespace domino_effect {
 
       var placeY = _groundMesh.transform.position.y + _groundMesh.bounds.extents.y + MeshRenderer.bounds.extents.y;
       var position = Transform.position;
-      Transform.position = new Vector3(position.x, placeY, position.z);
+      var placeX = _groundMesh.bounds.extents.x <= MeshRenderer.bounds.extents.x ? _groundMesh.transform.position.x : position.x;
+      _previewSpawn.position = new Vector3(placeX, placeY, position.z);
     }
 
-    private Vector3 GetOffset(Vector3 position, float boundsX, bool left = false) {
+    private Vector3 GetOffset(float boundsX, bool left = false) {
       return new Vector3((boundsX * (left ? -1 : 1)) / 2f, 0f, 0f);
     }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using domino_effect.PhysicsBody;
 using UnityEngine;
 using UnityEngine.Events;
@@ -39,12 +40,11 @@ namespace domino_effect.Spawn {
       Spawns.Add(spawned.GetComponent<IBody>());
       
       if(Spawns.Count == 1) OnFirstSpawn.Invoke();
-      else OnSpawn.Invoke(Spawns.Count);
+      
+      OnSpawn.Invoke(Spawns.Count);
     }
 
     public void DeleteSpawn(GameObject spawn) {
-      if (_spawnBlocker.IsSpawnBlocked()) return;
-
       Spawns.Remove(spawn?.GetComponent<IBody>());
       Destroy(spawn);
 
@@ -64,6 +64,11 @@ namespace domino_effect.Spawn {
     public void RollbackSpawnsValues() {
       foreach (var spawn in Spawns)
         spawn.Rollback();
+    }
+
+    public void ApplyForceToFirstDomino() {
+      var firstSpawn = Spawns.FirstOrDefault();
+      firstSpawn?.ApplyForce();
     }
   }
 

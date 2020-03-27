@@ -8,5 +8,7 @@ namespace domino_effect.PhysicsBody {
 
     (Vector3, Quaternion) InitialValues { get; }
     void Rollback();
+
+    void ApplyForce();
   }
 }
